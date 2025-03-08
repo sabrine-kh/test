@@ -129,7 +129,7 @@ def convert_to_csv(results):
     writer = csv.writer(output)
     writer.writerow(["Attribute", "Value"])
     writer.writerow(["Material Filling", results["material_filling"]])
-        writer.writerow(["Primary Material", results["primary_material"]])  
+    writer.writerow(["Primary Material", results["primary_material"]])  
     writer.writerow(["Pull-to-Seat", results["pull_to_seat"]])
     writer.writerow([])
     writer.writerow(["Processed Files"] + results["processed_files"])
