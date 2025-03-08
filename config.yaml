@@ -1,32 +1,31 @@
-# config.yaml
 attributes:
   material_filling:
     api_key: "fw_3ZWCy98ev3Bp7eJEY582CYve"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the Material Filling attribute from the provided documents.
-
-    Return abbreviations (e.g., GF, GB, MF, T) as a comma-separated list ONLY if additives are explicitly stated to modify the base material’s mechanical properties.
-    Return none if the document explicitly states no additives are used in the material.
-
-Output Rules:
-
-    If additives like GF, GB, MF, or T are directly mentioned, list their abbreviations in the output.
-    If the document confirms no additives are present, return none.
-    If material filling details are missing, ambiguous, or use non-standard/unclear terms, return NOT FOUND.
-
-Output format: Material Filling: [abbreviations] or none or NOT FOUND
       
+      - Return abbreviations (e.g., GF, GB, MF, T) as a comma-separated list ONLY if additives are explicitly stated to modify the base material’s mechanical properties.
+      - Return "none" if the document explicitly states no additives are used in the material.
+      
+      Output Rules:
+      - If additives like GF, GB, MF, or T are directly mentioned, list their abbreviations in the output.
+      - If the document confirms no additives are present, return "none".
+      - If material filling details are missing, ambiguous, or use non-standard/unclear terms, return "NOT FOUND".
+      
+      Output format: Material Filling: [abbreviations/none/NOT FOUND]
+
   pull_to_seat:
     api_key: "fw_3ZWCy98ev3Bp7eJEY582CYve"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the Pull-To-Seat attribute from the provided documents.
-
-    Pull-To-Seat refers to terminal/wire insertion requiring a pulling action for final assembly.
-    Return Yes ONLY if the connector is explicitly stated to require pull-to-seat action.
-    Return No if:
-        The connector uses preassembled retention features to secure terminals without pull-to-seat.
-        The document explicitly states pull-to-seat is not used.
-    Return NOT FOUND only if the information is ambiguous or entirely absent.
-    Output format: Pull-To-Seat: Yes / No / NOT FOUND
+      
+      - Pull-To-Seat refers to terminal/wire insertion requiring a pulling action for final assembly.
+      - Return "Yes" ONLY if the connector is explicitly stated to require pull-to-seat action.
+      - Return "No" if:
+          - The connector uses preassembled retention features to secure terminals without pull-to-seat
+          - The document explicitly states pull-to-seat is not used
+      - Return "NOT FOUND" only if the information is ambiguous or entirely absent
+      
+      Output format: Pull-To-Seat: [Yes/No/NOT FOUND]
