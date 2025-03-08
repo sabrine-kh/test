@@ -1,6 +1,6 @@
 attributes:
   material_filling:
-    api_key: "fw_3ZWCy98ev3Bp7eJEY582CYve"
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the Material Filling attribute from the provided documents.
@@ -16,7 +16,7 @@ attributes:
       Output format: Material Filling: [abbreviations/none/NOT FOUND]
 
   pull_to_seat:
-    api_key: "fw_3ZWCy98ev3Bp7eJEY582CYve"
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the Pull-To-Seat attribute from the provided documents.
@@ -31,7 +31,7 @@ attributes:
       Output format: Pull-To-Seat: [Yes/No/NOT FOUND]
   
   material_name:
-    api_key: "fw_3ZWCy98ev3Bp7eJEY582CYve"
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract the primary polymer material name from technical documents.
