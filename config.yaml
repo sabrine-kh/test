@@ -29,3 +29,19 @@ attributes:
       - Return "NOT FOUND" only if the information is ambiguous or entirely absent
       
       Output format: Pull-To-Seat: [Yes/No/NOT FOUND]
+  
+  material_name:
+    api_key: "fw_3ZWCy98ev3Bp7eJEY582CYve"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract the primary polymer material name from technical documents.
+      Rules:
+      1. Identify the polymer with the greatest weight fraction
+      2. Choose specific grades when available (e.g., PA66 over PA)
+      3. Prioritize explicit material declarations
+      4. Return single result in uppercase
+      5. Return NOT FOUND if unspecified
+      
+      Valid options: PA, PA66, PBT, PPS, LCP, NOT FOUND
+      Output format: Material Name: [value]
+      

@@ -3,6 +3,7 @@ import yaml
 from pathlib import Path
 from utils.pdf_processing import extract_text_with_ocr
 from processors.material_filling import analyze as analyze_material_filling
+from processors.material_name import analyze as analyze_material_name
 from processors.pull_to_seat import analyze as analyze_pull_to_seat
 import time
 
@@ -61,7 +62,9 @@ def main():
                 analysis_start = time.time()
                 
                 material = analyze_material_filling(combined_text)
+                material_name = analyze_material_name(combined_text)  # New analysis
                 pull_seat = analyze_pull_to_seat(combined_text)
+                
                 
                 total_analysis_time = time.time() - analysis_start
                 processing_times.append(total_analysis_time)
@@ -83,7 +86,7 @@ def main():
         
         # Combined Results
         st.markdown("### Material Attributes")
-        cols = st.columns(2)
+        cols = st.columns(3)
         cols[0].markdown(f"""
         **Material Filling**  
         `{material}`
@@ -91,6 +94,10 @@ def main():
         cols[1].markdown(f"""
         **Pull-to-Seat**  
         `{pull_seat}`
+        """)
+        cols[2].markdown(f"""
+        **Primary Material**  
+        `{material_name}`
         """)
         
         # Source Documents
@@ -101,6 +108,7 @@ def main():
         # Export Options
         csv_data = convert_to_csv({
             "material_filling": material,
+            "primary_material": material_name,
             "pull_to_seat": pull_seat,
             "processed_files": [f.name for f in valid_files]
         })
@@ -121,6 +129,7 @@ def convert_to_csv(results):
     writer = csv.writer(output)
     writer.writerow(["Attribute", "Value"])
     writer.writerow(["Material Filling", results["material_filling"]])
+        writer.writerow(["Primary Material", results["primary_material"]])  
     writer.writerow(["Pull-to-Seat", results["pull_to_seat"]])
     writer.writerow([])
     writer.writerow(["Processed Files"] + results["processed_files"])
