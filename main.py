@@ -15,8 +15,8 @@ def main():
     st.set_page_config(page_title="Material Analytics", layout="wide")
     
     # Header Section
-    st.title("📄 Material Properties Analyzer")
-    st.markdown("Upload technical documents to extract material attributes")
+    st.title("📄 Combined Document Analyzer")
+    st.markdown("Upload multiple technical documents for combined analysis")
     
     # File Upload
     uploaded_files = st.file_uploader(
@@ -34,71 +34,77 @@ def main():
         ]
         
         with st.status("🔍 Processing documents...", expanded=True) as status:
-            results = []
+            combined_text = ""
+            processing_times = []
             
-            for file in valid_files:
-                try:
-                    # File processing
-                    st.write(f"📥 Processing {file.name}...")
+            try:
+                # First pass: Combine all text
+                for file in valid_files:
+                    st.write(f"📥 Extracting text from {file.name}...")
                     start_time = time.time()
                     
-                    # Text extraction
-                    text = extract_text_with_ocr(file.read())
+                    # Extract and combine text
+                    file_content = file.read()
+                    text = extract_text_with_ocr(file_content)
+                    combined_text += f"\n----- {file.name} -----\n{text}"
                     
-                    # Attribute analysis
-                    material = analyze_material_filling(text)
-                    pull_seat = analyze_pull_to_seat(text)
-                    
-                    # Store results
-                    results.append({
-                        "filename": file.name,
-                        "material_filling": material,
-                        "pull_to_seat": pull_seat,
-                        "processing_time": time.time() - start_time
-                    })
-                    
-                    st.success(f"✅ {file.name} processed in {results[-1]['processing_time']:.1f}s")
-                    
-                except Exception as e:
-                    st.error(f"❌ Error processing {file.name}: {str(e)}")
-                    results.append({
-                        "filename": file.name,
-                        "error": str(e)
-                    })
+                    processing_time = time.time() - start_time
+                    processing_times.append(processing_time)
+                    st.success(f"✅ {file.name} processed in {processing_time:.1f}s")
+                
+                # Second pass: Analyze combined text
+                st.write("🔍 Analyzing combined content...")
+                analysis_start = time.time()
+                
+                material = analyze_material_filling(combined_text)
+                pull_seat = analyze_pull_to_seat(combined_text)
+                
+                total_analysis_time = time.time() - analysis_start
+                processing_times.append(total_analysis_time)
+                
+                status.update(label=f"Processed {len(valid_files)} files", state="complete")
+                
+            except Exception as e:
+                st.error(f"❌ Processing failed: {str(e)}")
+                return
             
-            status.update(label=f"Processed {len(valid_files)} files", state="complete")
-        
         # Display Results
-        st.subheader("📊 Analysis Results")
+        st.subheader("📊 Combined Analysis Results")
         
         # Summary Cards
         col1, col2, col3 = st.columns(3)
         col1.metric("Total Files", len(valid_files))
-        col2.metric("Successful Analyses", f"{sum(1 for r in results if 'error' not in r)}/{len(results)}")
-        col3.metric("Avg Processing Time", f"{sum(r.get('processing_time',0) for r in results)/len(results):.1f}s")
+        col2.metric("Total Processing Time", f"{sum(processing_times):.1f}s")
+        col3.metric("Analysis Time", f"{total_analysis_time:.1f}s")
         
-        # Detailed Results
-        for result in results:
-            with st.expander(f"📄 {result['filename']}", expanded=False):
-                if 'error' in result:
-                    st.error(f"Processing error: {result['error']}")
-                else:
-                    cols = st.columns(2)
-                    cols[0].markdown(f"""
-                    **Material Filling**  
-                    `{result['material_filling']}`
-                    """)
-                    cols[1].markdown(f"""
-                    **Pull-to-Seat**  
-                    `{result['pull_to_seat']}`
-                    """)
-                st.caption(f"Processing time: {result.get('processing_time',0):.2f} seconds")
+        # Combined Results
+        st.markdown("### Material Attributes")
+        cols = st.columns(2)
+        cols[0].markdown(f"""
+        **Material Filling**  
+        `{material}`
+        """)
+        cols[1].markdown(f"""
+        **Pull-to-Seat**  
+        `{pull_seat}`
+        """)
+        
+        # Source Documents
+        with st.expander("📚 Processed Documents"):
+            for file in valid_files:
+                st.caption(f"📄 {file.name}")
         
         # Export Options
+        csv_data = convert_to_csv({
+            "material_filling": material,
+            "pull_to_seat": pull_seat,
+            "processed_files": [f.name for f in valid_files]
+        })
+        
         st.download_button(
             label="📥 Export Results as CSV",
-            data=convert_to_csv(results),
-            file_name="material_analysis.csv",
+            data=csv_data,
+            file_name="combined_analysis.csv",
             mime="text/csv"
         )
 
@@ -108,9 +114,12 @@ def convert_to_csv(results):
     from io import StringIO
     
     output = StringIO()
-    writer = csv.DictWriter(output, fieldnames=results[0].keys())
-    writer.writeheader()
-    writer.writerows(results)
+    writer = csv.writer(output)
+    writer.writerow(["Attribute", "Value"])
+    writer.writerow(["Material Filling", results["material_filling"]])
+    writer.writerow(["Pull-to-Seat", results["pull_to_seat"]])
+    writer.writerow([])
+    writer.writerow(["Processed Files"] + results["processed_files"])
     
     return output.getvalue()
 
