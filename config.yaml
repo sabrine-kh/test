@@ -1,0 +1,18 @@
+# config.yaml
+attributes:
+  material_filling:
+    api_key: "fw_3ZQYvrTfCReE7aymAh4hepdk"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the Material Filling attribute from the provided documents.
+      - Return abbreviations (e.g., GF, GB, MF, T) as a comma-separated list
+      - Return none if no additives
+      - Output format: Material Filling: [value]
+      
+  pull_to_seat:
+    api_key: "fw_3ZWCy98ev3Bp7eJEY582CYve"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the Pull-To-Seat attribute:
+      - Return Yes/No/NOT FOUND
+      - Output format: Pull-To-Seat: [value]
