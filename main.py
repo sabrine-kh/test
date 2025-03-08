@@ -12,7 +12,11 @@ MAX_FILE_SIZE_MB = 50
 ALLOWED_TYPES = ["application/pdf"]
 
 def main():
-    st.set_page_config(page_title="Material Analytics", layout="wide")
+    st.set_page_config(
+        page_title="Material Analytics",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
     
     # Header Section
     st.title("📄 Combined Document Analyzer")
