@@ -13,7 +13,7 @@ attributes:
       - If the document confirms no additives are present, return "none".
       - If material filling details are missing, ambiguous, or use non-standard/unclear terms, return "NOT FOUND".
       
-      Output format: Material Filling: [abbreviations/none/NOT FOUND]
+      Output format: Material Filling: [abbreviations/none]
 
   pull_to_seat:
     api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
@@ -25,10 +25,8 @@ attributes:
       - Return "Yes" ONLY if the connector is explicitly stated to require pull-to-seat action.
       - Return "No" if:
           - The connector uses preassembled retention features to secure terminals without pull-to-seat
-          - The document explicitly states pull-to-seat is not used
-      - Return "NOT FOUND" only if the information is ambiguous or entirely absent
-      
-      Output format: Pull-To-Seat: [Yes/No/NOT FOUND]
+          - The document explicitly states pull-to-seat is not used      
+      Output format: Pull-To-Seat: [Yes/No]
   
   material_name:
     api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
