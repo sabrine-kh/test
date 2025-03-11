@@ -42,4 +42,281 @@ attributes:
       
       Valid options: PA, PA66, PBT, PPS, LCP, NOT FOUND
       Output format: Material Name: [value]
-      
+
+  working_temperature:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the working temperature information from the combined documents.
+      For *Max. Working Temperature [°C]*: Provide the maximum working temperature in °C as specified in the drawing/datasheet. If no value is available, enter 999. If multiple temperature classes are given, choose the highest value.
+      For *Min. Working Temperature [°C]*: Provide the minimum working temperature in °C as specified in the drawing/datasheet. If no value is available, enter 999. but also mention If the document references standard temperature classes, infer the industry-standard minimum.
+      choose only one as final answer for min and max
+      Default to NOT FOUND if unspecified.
+      Output format: Working Temperature: [Max value], [Min value]
+
+  colour:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the color information from the combined documents.
+      If the part is an **assembled component**, select the **dominant color** of the complete assembly.
+      If the part is a **single-piece connector**, select the **color of the housing**.
+      If the connector consists of **multiple colors without a dominant one**, enter *multi*.
+      choose only one as final answer for color
+      Default to NOT FOUND if unspecified.
+      Output format: Colour: [Your Value]
+
+  contact_systems:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the approved **Contact Systems** information from the combined documents.
+      Identify the contact system(s) specified by the **supplier/manufacturer** for the connector.
+      If a contact system family (e.g., TAB 1.8 0.64 MCP 2.8 MLK 1.2 MQS 0.64,SLK 2.8 HF 0.64 MPQ 2.8,MQS 0.64) is specified, return that **instead** of part numbers.
+      If only terminal part numbers are found, attempt to determine their contact system type.
+      If more than one contact system is listed, include **all of them**, separated by commas (`,`).
+      Default to NOT FOUND if unspecified.
+      Output format: Contact Systems: [Your Value]
+
+  gender:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the **Gender** information from the combined documents.
+      If the connector is designed for **male terminals**, return *Male*.
+      If the connector is designed for **female terminals**, return *Female*.
+      If the connector contains **both male and female terminals in the same cavity**, return *Unisex*.
+      If the connector has **separate cavities for male and female terminals**, return *Hybrid*.
+      Default to NOT FOUND if unspecified.
+      Output format: Gender: [Your Value]
+
+  height_mm:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the **Height [mm]** information from the combined documents.
+      The height is measured in **direction Y**.
+      It represents the **total height of the connector** (in millimeters) as per the supplier drawing.
+      If the height is **greater than the width**, still consider it as height.
+      The height should be measured **with the connector fully assembled**.
+      If the connector includes a **TPA (Terminal Position Assurance) or CPA (Connector Position Assurance)**, the height should be taken **in the locked position**.
+      If multiple height-related values appear (e.g., **dimensions that should be summed**), **calculate the total height** instead of extracting a single value.
+      If no height value is found, return **999** as the default.
+      Output format: Height [mm]: [Your Value]
+
+  housing_seal:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the Housing Seal information from the combined documents.
+      The sealing type must be Radial Seal or Interface Seal (exact terms, case-sensitive).
+      Output format: Housing Seal: [Your Value]
+
+  hv_qualified:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the HV Qualified information from the combined documents.
+      Set to *Yes* ONLY IF the documentation explicitly states the connector is HV-qualified OR the parts are used in an *HV-connector* or *HV-assembly* (e.g., *HV application*, *high-voltage system*).
+      Set to *No* if the voltage range is ≤60 V OR there is no reference to *HV qualification*, *HV connectors*, or *high-voltage applications*.
+      If multiple conflicting values exist, prioritize the *latest document*.
+      If the voltage is exactly *60 V*, default to *No*.
+      If the context implies HV use but lacks explicit confirmation, default to *No*.
+      If no HV-related information is found, return *No* as the default.
+      Output format: HV Qualified: [Yes/No]
+
+  length_mm:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the Length [mm] information from the combined documents.
+      The length is measured in *direction Z*.
+      It represents the *total length of the connector* (in millimeters) from the mating face (plug-in side) to the back (wire/cable side) as per the supplier drawing.
+      The length must be measured *with the connector fully assembled*.
+      If the connector includes a *TPA (Terminal Position Assurance)* or *CPA (Connector Position Assurance)*, the length should be taken *in the locked position*.
+      If multiple length values are mentioned, prioritize the value from the *latest document*.
+      If no length value is found, return *999* as the default.
+      Output format: Length [mm]: [Your Value]
+
+  mechanical_coding:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the Mechanical Coding information from the combined documents.
+      The coding value must be *A, B, C, D, Z, no naming*, or *none* (exact terms, case-sensitive).
+      If the coding is *mentioned on the drawing* (e.g., labeled as *Coding A*), use the specified value (A/B/C/D).
+      If the coding is *only drawn* (e.g., visible in diagrams) but not explicitly named, return *no naming*.
+      If all codings in a connector family fit a *universal connector* (neutral/0 coding), use *Z*.
+      If the connector has *no mechanical coding*, return *none*.
+      If multiple coding values exist, prioritize the *latest document*.
+      If the coding is ambiguously described (e.g., *coding not labeled*), default to *no naming*.
+      If no coding information is found, return *no naming* as the default.
+      Output format: Mechanical Coding: [Your Value]
+
+  number_of_cavities:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the Number Of Cavities from the combined documents.
+      Valid values: 1 (if single-cavity), a positive integer, or 999 (if unspecified).
+      Key Indicators:
+      - Explicit labels such as 1-CAVITY, 2-POSITION, or 3-WAY in the title block, description, or housing diagram.
+      - Part numbers with suffixes like -1C (1 cavity) or -3P (3 positions).
+      Conditions:
+      - If terms like 1-WAY, 1-POSN, or SINGLE-CAVITY are present, interpret them as indicating 1 cavity—even if other numbers appear.
+      - Ignore unrelated numbers (e.g., temperature classes, part numbers).
+      Priority:
+      - If conflicting values exist, use the value from the latest document.
+      - If no explicit cavity count is found, return 999.
+      Output format: Number Of Cavities: [Value]
+
+  number_of_rows:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the Number Of Rows from the combined documents.
+      Valid values: 0 (if criteria fail) or a positive integer.
+      Definition:
+      - A row is a horizontal line of cavities along the connector’s longer side.
+      - Valid only if the housing is square/rectangular AND all cavities are identical in size.
+      Conditions for 0:
+      - Non-straight rows, mixed cavity sizes, non-rectangular housing, or single-cavity connectors.
+      Key Indicators:
+      - Terms like ROW, POSN (position), or WAY in the description (e.g., 1-WAY indicates 1 row).
+      - Explicit labels (e.g., 2 ROWS) in title blocks or diagrams.
+      Priority:
+      - If conflicting data exists across documents, use the value from the latest document.
+      - If no valid row information is found, return 0.
+      Output format: Number Of Rows: [Value]
+
+  pre_assembled:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the **Pre-assembled** information from the combined documents.
+      For **Pre-assembled**:
+      - If the connector is **delivered as an assembly** and must be **disassembled in production** before use, return **Yes**.
+      - If the connector includes **a preassembled TPA, CPA, lever, or other components** that do **not** require disassembly in production, return **No**.
+      - If no information is found regarding pre-assembly or disassembly requirements, return **NOT FOUND** as the default.
+      Output format: Pre-assembled: [Yes/No/NOT FOUND]
+
+  sealing:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the **Sealing** information from the combined documents.
+      For **Sealing**:
+      - If the connector is designed to prevent the ingress of water, dust, or other contaminants, return **Sealed**.
+      - If the connector does not have sealing features, return **Unsealed**.
+      - If no information is found regarding sealing, return **NOT FOUND** as the default.
+      Output format: Sealing: [Sealed/Unsealed/NOT FOUND]
+
+  sealing_class:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the **Sealing Class (IP Code)** information from the combined documents.
+      - Look for IP classification codes such as **IPx0, IPx4, IPx4K, IPx5, IPx6, IPx6K, IPx7, IPx8, IPx9, and IPx9K** as specified in ISO 20653.
+      - If the IP class is not explicitly mentioned in the documents, check if the connector falls under one of these general classes:
+        - **Class S1 (Unsealed) → Default to IPx0**
+        - **Class S2 (Sealed) → Default to IPx7**
+        - **Class S3 (Sealed – High Pressure Spray) → Default to IPx9K**
+      Output format: Sealing Class: [IP Code]
+
+  terminal_position_assurance:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the **Terminal Position Assurance (TPA) count** from the combined documents.
+      - Identify the number of TPAs included in the delivered connector.
+      - If TPAs are **preassembled** as part of the connector, infer the count based on context (e.g., 1 TPA for a 1-position connector).
+      - If the TPA is **not preassembled and must be assembled separately in production**, return `0`.
+      - If the information is missing from the documents, return `NOT FOUND`.
+      Output format: Terminal Position Assurance: [Number of TPAs / 0 / NOT FOUND]
+
+  connector_type:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the **Type of Connector** from the combined documents.
+      - Identify the general application area or purpose of the connector as described in the documents.
+      - Common types include **Standard, Contact Carrier, Actuator**, etc.
+      - If no type is explicitly mentioned, infer it based on the context of the connector.
+      - If the information is missing, return `NOT FOUND`.
+      Output format: Type of Connector: [Standard / Contact Carrier / Actuator / Other / NOT FOUND]
+
+  width_mm:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the **Width [mm]** of the connector from the provided documents.
+      - The **Width** is measured in the **X direction** according to the supplier's drawing.
+      - If the connector includes a **TPA/CPA**, the width should be taken in the **locked position**.
+      - If the width is **not explicitly stated**, return `NOT FOUND`.
+      Output format: Width [mm]: [Value] or NOT FOUND
+
+  wire_seal:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the **Wire Seal** type from the provided documents.
+      - The **Wire Seal** describes the sealing between the **wire** and the **cavity wall** when a terminal is inserted.
+      - Possible values are:
+        - **Single Wire Seal**
+        - **Injected**
+        - **Mat Seal**
+        - **None**
+      - If the document pairs **unique seal part numbers with individual wire sizes/positions**, classify it as **Single Wire Seal**.
+      - If the document lacks explicit or implicit descriptors, return `NOT FOUND`.
+      Output format: Wire Seal: [Value] or NOT FOUND
+
+  connector_position_assurance:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the **Connector Position Assurance (CPA)** information from the provided documents.
+      - CPA is an **additional protection** that ensures the connector is placed correctly and **prevents unintentional removal**.
+      - Sometimes referred to as **‘Anti-Backout’**.
+      - Possible values:
+        - **Yes** → If the connector has a CPA feature.
+        - **No** → If the connector does not have a CPA feature.
+      - If the document **does not specify** CPA, return `NOT FOUND`.
+      Output format: Connector Position Assurance: [Yes/No] or NOT FOUND
+
+  colour_coding:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the **Colour Coding** information from the provided documents.
+      - **Colour Coding** is used to **visually/mechanically distinguish** between connectors of the same family **within the same drawing**.
+      - Prioritize colors applied to **primary mechanical coding components** (e.g., CPA, TPA, keys) over other parts.
+      - Return **only one color** (the most dominant or explicitly coded).
+      - Return `None` if no color coding exists.
+      - Return `NOT FOUND` if ambiguous or absent.
+      Output format: Colour Coding: [Color] / None / NOT FOUND
+
+  set_kit:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the **Set/Kit** attribute from the provided documents.
+      - A connector is considered a **Set/Kit** (**Yes**) if it is delivered with **one LEONI part number** and includes separate accessories (e.g., cover, lever, TPA) **that are NOT preassembled**.
+      - If all loose pieces have **their own separate LEONI part numbers**, then it is **No**.
+      Output Rules:
+      - If the document explicitly states that the connector is delivered as a **Set/Kit**, return `Yes`.
+      - If all components have **separate LEONI part numbers**, return `No`.
+      - If the information is **unclear or not found**, return `NOT FOUND`.
+      Output format: Set/Kit: `Yes` or `No` or `NOT FOUND`
+
+  closed_cavities:
+    api_key: "fw_3ZYLhpzQtRzZKYMpheCBRa6t"
+    model: "accounts/fireworks/models/deepseek-r1"
+    system_prompt: |
+      Extract ONLY the Name Of Closed Cavities attribute from the provided documents.
+      - If closed cavities are explicitly listed with their numerations, return the numbers separated by commas (e.g., 1,3,5).
+      - If all cavities are open or closed cavities lack numerations, return none.
+      Output Rules:
+      - If the document specifies numbered closed cavities, list ONLY those numbers.
+      - If no closed cavities are mentioned, all cavities are open, or closed cavities are unnumbered, return none.
+      - If the information is missing, ambiguous, or unclear, return NOT FOUND.
+      Output format: Name Of Closed Cavities: [numbers separated by commas] or none or NOT FOUND
