@@ -1,6 +1,6 @@
 attributes:
   material_filling:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the Material Filling attribute from the provided documents.
@@ -16,10 +16,10 @@ attributes:
       Output format: Material Filling: [abbreviations/none]
 
   pull_to_seat:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
-      Extract ONLY the Pull-To-Seat attribute from the provided document.
+      Extract ONLY the Pull-To-Seat attribute from the provided documents.
       
       - Pull-To-Seat refers to terminal/wire insertion requiring a pulling action for final assembly.
       - Return "Yes" ONLY if the connector is explicitly stated to require pull-to-seat action.
@@ -29,7 +29,7 @@ attributes:
       Output format: Pull-To-Seat: [Yes/No]
   
   material_name:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract the primary polymer material name from technical documents.
@@ -44,7 +44,7 @@ attributes:
       Output format: Material Name: [value]
 
   working_temperature:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the working temperature information from the combined documents.
@@ -55,7 +55,7 @@ attributes:
       Output format: Working Temperature: [Max value], [Min value]
 
   colour:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the color information from the combined documents.
@@ -67,7 +67,7 @@ attributes:
       Output format: Colour: [Your Value]
 
   contact_systems:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the approved **Contact Systems** information from the combined documents.
@@ -79,7 +79,7 @@ attributes:
       Output format: Contact Systems: [Your Value]
 
   gender:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the **Gender** information from the combined documents.
@@ -91,7 +91,7 @@ attributes:
       Output format: Gender: [Your Value]
 
   height_mm:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the **Height [mm]** information from the combined documents.
@@ -105,7 +105,7 @@ attributes:
       Output format: Height [mm]: [Your Value]
 
   housing_seal:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the Housing Seal information from the combined documents.
@@ -113,7 +113,7 @@ attributes:
       Output format: Housing Seal: [Your Value]
 
   hv_qualified:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the HV Qualified information from the combined documents.
@@ -126,7 +126,7 @@ attributes:
       Output format: HV Qualified: [Yes/No]
 
   length_mm:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the Length [mm] information from the combined documents.
@@ -139,7 +139,7 @@ attributes:
       Output format: Length [mm]: [Your Value]
 
   mechanical_coding:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the Mechanical Coding information from the combined documents.
@@ -154,7 +154,7 @@ attributes:
       Output format: Mechanical Coding: [Your Value]
 
   number_of_cavities:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the Number Of Cavities from the combined documents.
@@ -171,7 +171,7 @@ attributes:
       Output format: Number Of Cavities: [Value]
 
   number_of_rows:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "ffw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the Number Of Rows from the combined documents.
@@ -190,7 +190,7 @@ attributes:
       Output format: Number Of Rows: [Value]
 
   pre_assembled:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the **Pre-assembled** information from the combined documents.
@@ -201,7 +201,7 @@ attributes:
       Output format: Pre-assembled: [Yes/No/NOT FOUND]
 
   sealing:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the **Sealing** information from the combined documents.
@@ -212,7 +212,7 @@ attributes:
       Output format: Sealing: [Sealed/Unsealed/NOT FOUND]
 
   sealing_class:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the **Sealing Class (IP Code)** information from the combined documents.
@@ -224,7 +224,7 @@ attributes:
       Output format: Sealing Class: [IP Code]
 
   terminal_position_assurance:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the **Terminal Position Assurance (TPA) count** from the combined documents.
@@ -235,7 +235,7 @@ attributes:
       Output format: Terminal Position Assurance: [Number of TPAs / 0 / NOT FOUND]
 
   connector_type:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the **Type of Connector** from the combined documents.
@@ -246,7 +246,7 @@ attributes:
       Output format: Type of Connector: [Standard / Contact Carrier / Actuator / Other / NOT FOUND]
 
   width_mm:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the **Width [mm]** of the connector from the provided documents.
@@ -256,7 +256,7 @@ attributes:
       Output format: Width [mm]: [Value] or NOT FOUND
 
   wire_seal:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the **Wire Seal** type from the provided documents.
@@ -271,7 +271,7 @@ attributes:
       Output format: Wire Seal: [Value] or NOT FOUND
 
   connector_position_assurance:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the **Connector Position Assurance (CPA)** information from the provided documents.
@@ -284,7 +284,7 @@ attributes:
       Output format: Connector Position Assurance: [Yes/No] or NOT FOUND
 
   colour_coding:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the **Colour Coding** information from the provided documents.
@@ -296,7 +296,7 @@ attributes:
       Output format: Colour Coding: [Color] / None / NOT FOUND
 
   set_kit:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the **Set/Kit** attribute from the provided documents.
@@ -309,7 +309,7 @@ attributes:
       Output format: Set/Kit: `Yes` or `No` or `NOT FOUND`
 
   closed_cavities:
-    api_key: "fw_3Zh4hsCigzDSN9QHfS1mqqS9"
+    api_key: "fw_3ZUuGLzezsuzsR3tYkTFXH7t"
     model: "accounts/fireworks/models/deepseek-r1"
     system_prompt: |
       Extract ONLY the Name Of Closed Cavities attribute from the provided documents.
